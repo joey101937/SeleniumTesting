@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
@@ -22,9 +23,10 @@ public class seleniumSandbox {
     
     private static WebDriver driver;
     private static JavascriptExecutor jse;
+    private static String locationOfDriver = System.getProperty("user.dir")+"/lib/chromedriver.exe"; //file path to driver file relative to this project
     
     private static void setup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Joseph DeMeis\\Documents\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", locationOfDriver);
         driver = new ChromeDriver();
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -64,9 +66,23 @@ public class seleniumSandbox {
         setup();
         driver.get("http://google.com");
         driver.findElement(By.xpath("//a[contains(text(),'Images')]")).click();
+        driver.close();
+        System.out.println("success");
+    }
+    
+    /**
+     * goes to google and prints element attributes 
+     */
+    public static void example3(){
+        setup();
+        driver.get("http://google.com");
+        for(WebElement we : driver.findElements(By.xpath("//a"))){
+            System.out.println("Element: " + we.getText() + "  -  " +  we.getAttribute("href"));
+        }
+        driver.close();
     }
     
     public static void main(String[] args) {
-        example2(); 
+        example3(); 
     }
 }
