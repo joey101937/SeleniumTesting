@@ -19,11 +19,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author Joseph DeMeis
  */
-public class seleniumSandbox {
+public class SeleniumSandbox {
     
     private static WebDriver driver;
     private static JavascriptExecutor jse;
-    private static String locationOfDriver = System.getProperty("user.dir")+"/lib/chromedriver.exe"; //file path to driver file relative to this project
+    public static String locationOfDriver = System.getProperty("user.dir")+"/lib/chromedriver.exe"; //file path to driver file relative to this project
     
     private static void setup() {
         System.setProperty("webdriver.chrome.driver", locationOfDriver);
@@ -52,7 +52,7 @@ public class seleniumSandbox {
             try {
                 Thread.sleep(200);
             } catch (InterruptedException ex) {
-                Logger.getLogger(seleniumSandbox.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SeleniumSandbox.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         driver.quit();
@@ -69,7 +69,7 @@ public class seleniumSandbox {
         driver.close();
         System.out.println("success");
     }
-    
+     
     /**
      * goes to google and prints element attributes 
      */
